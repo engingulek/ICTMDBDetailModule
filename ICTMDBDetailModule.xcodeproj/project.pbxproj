@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D9D91B12EC5000F0067193D /* GenericCollectionViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7D9D91B02EC5000F0067193D /* GenericCollectionViewKit */; };
+		7D9D91B42EC500210067193D /* DependencyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7D9D91B32EC500210067193D /* DependencyKit */; };
+		7D9D91B72EC500350067193D /* ICTMDBModularProtocols in Frameworks */ = {isa = PBXBuildFile; productRef = 7D9D91B62EC500350067193D /* ICTMDBModularProtocols */; };
+		7D9D91BA2EC500480067193D /* ICTMDBNetworkManagerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7D9D91B92EC500480067193D /* ICTMDBNetworkManagerKit */; };
+		7D9D91BD2EC5005D0067193D /* ICTMDBViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7D9D91BC2EC5005D0067193D /* ICTMDBViewKit */; };
+		7D9D91C02EC500720067193D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7D9D91BF2EC500720067193D /* SnapKit */; };
 		7DB55E462EC4FF1500A0EA27 /* ICTMDBDetailModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DB55E3C2EC4FF1500A0EA27 /* ICTMDBDetailModule.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +49,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D9D91B42EC500210067193D /* DependencyKit in Frameworks */,
+				7D9D91B12EC5000F0067193D /* GenericCollectionViewKit in Frameworks */,
+				7D9D91B72EC500350067193D /* ICTMDBModularProtocols in Frameworks */,
+				7D9D91C02EC500720067193D /* SnapKit in Frameworks */,
+				7D9D91BA2EC500480067193D /* ICTMDBNetworkManagerKit in Frameworks */,
+				7D9D91BD2EC5005D0067193D /* ICTMDBViewKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +118,12 @@
 			);
 			name = ICTMDBDetailModule;
 			packageProductDependencies = (
+				7D9D91B02EC5000F0067193D /* GenericCollectionViewKit */,
+				7D9D91B32EC500210067193D /* DependencyKit */,
+				7D9D91B62EC500350067193D /* ICTMDBModularProtocols */,
+				7D9D91B92EC500480067193D /* ICTMDBNetworkManagerKit */,
+				7D9D91BC2EC5005D0067193D /* ICTMDBViewKit */,
+				7D9D91BF2EC500720067193D /* SnapKit */,
 			);
 			productName = ICTMDBDetailModule;
 			productReference = 7DB55E3C2EC4FF1500A0EA27 /* ICTMDBDetailModule.framework */;
@@ -161,6 +179,14 @@
 			);
 			mainGroup = 7DB55E322EC4FF1500A0EA27;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7D9D91AF2EC5000F0067193D /* XCRemoteSwiftPackageReference "GenericCollectionViewKit" */,
+				7D9D91B22EC500210067193D /* XCRemoteSwiftPackageReference "HPDependencyKit" */,
+				7D9D91B52EC500350067193D /* XCRemoteSwiftPackageReference "ICTMDBModularProtocols" */,
+				7D9D91B82EC500480067193D /* XCRemoteSwiftPackageReference "ICTMDBNetworkManagerKit" */,
+				7D9D91BB2EC5005D0067193D /* XCRemoteSwiftPackageReference "ICTMDBViewKit" */,
+				7D9D91BE2EC500720067193D /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7DB55E3D2EC4FF1500A0EA27 /* Products */;
 			projectDirPath = "";
@@ -483,6 +509,90 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7D9D91AF2EC5000F0067193D /* XCRemoteSwiftPackageReference "GenericCollectionViewKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/engingulek/GenericCollectionViewKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.2;
+			};
+		};
+		7D9D91B22EC500210067193D /* XCRemoteSwiftPackageReference "HPDependencyKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/engingulek/HPDependencyKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		7D9D91B52EC500350067193D /* XCRemoteSwiftPackageReference "ICTMDBModularProtocols" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/engingulek/ICTMDBModularProtocols";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
+			};
+		};
+		7D9D91B82EC500480067193D /* XCRemoteSwiftPackageReference "ICTMDBNetworkManagerKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/engingulek/ICTMDBNetworkManagerKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.2;
+			};
+		};
+		7D9D91BB2EC5005D0067193D /* XCRemoteSwiftPackageReference "ICTMDBViewKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/engingulek/ICTMDBViewKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.2;
+			};
+		};
+		7D9D91BE2EC500720067193D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7D9D91B02EC5000F0067193D /* GenericCollectionViewKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D9D91AF2EC5000F0067193D /* XCRemoteSwiftPackageReference "GenericCollectionViewKit" */;
+			productName = GenericCollectionViewKit;
+		};
+		7D9D91B32EC500210067193D /* DependencyKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D9D91B22EC500210067193D /* XCRemoteSwiftPackageReference "HPDependencyKit" */;
+			productName = DependencyKit;
+		};
+		7D9D91B62EC500350067193D /* ICTMDBModularProtocols */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D9D91B52EC500350067193D /* XCRemoteSwiftPackageReference "ICTMDBModularProtocols" */;
+			productName = ICTMDBModularProtocols;
+		};
+		7D9D91B92EC500480067193D /* ICTMDBNetworkManagerKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D9D91B82EC500480067193D /* XCRemoteSwiftPackageReference "ICTMDBNetworkManagerKit" */;
+			productName = ICTMDBNetworkManagerKit;
+		};
+		7D9D91BC2EC5005D0067193D /* ICTMDBViewKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D9D91BB2EC5005D0067193D /* XCRemoteSwiftPackageReference "ICTMDBViewKit" */;
+			productName = ICTMDBViewKit;
+		};
+		7D9D91BF2EC500720067193D /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D9D91BE2EC500720067193D /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7DB55E332EC4FF1500A0EA27 /* Project object */;
 }
