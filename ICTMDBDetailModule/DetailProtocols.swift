@@ -5,7 +5,7 @@
 //  Created by Engin Gülek on 12.11.2025.
 //
 
-typealias Ables = UIViewAble
+typealias Ables = UIViewAble & NavConUIAble
  import ICTMDBViewKit
  import GenericCollectionViewKit
 
