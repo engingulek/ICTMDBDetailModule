@@ -37,7 +37,7 @@ final class SeasonCell: UICollectionViewCell {
         containerView.addSubview(ratingLabel)
         
       
-        contentView.backgroundColor = .red
+        contentView.backgroundColor = .clear
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.15
         layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -100,7 +100,12 @@ final class SeasonCell: UICollectionViewCell {
         }
     }
     
-    func configure() {
+    func configure(season:SeasonPresentation) {
+        posterImageView.setImageWithKigfisher(with: season.poster)
+        seasonLabel.text = season.seasonTitle
+        airDateLabel.text = season.airdate
+        episodeCountLabel.text = season.episodeCount
+        ratingLabel.text = season.rating
     }
 }
 

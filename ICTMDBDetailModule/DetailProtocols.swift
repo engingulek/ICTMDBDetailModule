@@ -23,7 +23,7 @@ protocol ViewToPresenterTvShowDetailProtocol:
 
 
 protocol PresenterToViewTvShowDetailProtocol : AnyObject,Ables{
-    func sendData()
+    func sendData(detail:TvShowDetailPresentation,title:TvShowDetailTitlePresentation)
     func relaodCollectionView()
     func prepareCollectionView()
 }
@@ -41,9 +41,9 @@ enum TvShowErrorType : Error{
     case castError
 }
 enum TvShowInteractorResult {
-    case sendData
-    case sendCast
-    case sendError
+    case sendData(_ data: TvShowDetail,)
+    case sendCast(_ data:[Cast])
+    case sendError(_ error:TvShowErrorType)
 }
 
 protocol InteractorToPresenterTvShowDetailProtocol {

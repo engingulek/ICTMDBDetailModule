@@ -7,14 +7,15 @@
 
  import UIKit
 import SnapKit
-extension DetailViewController{
+
+
+
+extension DetailViewController {
    
    func setupCollectionView() {
        mainStackView.addArrangedSubview(collectionView)
               collectionView.snp.makeConstraints { $0.height.equalTo(570) }
-              
-              collectionView.dataSource = dataSource
-              collectionView.delegate = delegateSource
+
    }
    
    func configureCollectionData() {
