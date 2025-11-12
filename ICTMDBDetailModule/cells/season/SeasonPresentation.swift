@@ -26,7 +26,7 @@ extension SeasonPresentation {
         self.poster = "https://image.tmdb.org/t/p/w500\(season.posterPath ?? "")"
         self.seasonTitle = season.name ?? ""
         self.airdate = "\(LocalizableUI.firstAirDate.localized) : \( season.airDate?.toLongDateString() ?? "N/A")"
-        self.episodeCount = "\(LocalizableUI.season.localized) \( season.episodeCount == 0 ? "-" : "\(season.episodeCount ?? 0)")"
+        self.episodeCount = "\(LocalizableUI.episodes.localized) \( season.episodeCount == 0 ? "-" : "\(season.episodeCount ?? 0)")"
         
         self.rating =  "⭐️ \(season.voteAverage ?? 0)"
     }

@@ -24,6 +24,7 @@ final class TvShowDetailPresenter {
     
     func viewDidLoad() {
         view?.setBackColorAble(color: "backColor")
+        view?.setNavigationTitle(title: "Detail")
        // view?.prepareCollectionView()
     }
 }
