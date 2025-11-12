@@ -33,7 +33,7 @@ final class CastCell: UICollectionViewCell {
         containerView.addSubview(characterLabel)
         
       
-        contentView.backgroundColor = .blue
+        contentView.backgroundColor = .clear
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.15
         layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -88,8 +88,10 @@ final class CastCell: UICollectionViewCell {
         }
     }
     
-    func configure() {
-       
+    func configure(cast:CastPresentation) {
+        castImageView.setImageWithKigfisher(with: cast.image)
+        nameLabel.text = cast.name
+        characterLabel.text = cast.character
     }
     
 

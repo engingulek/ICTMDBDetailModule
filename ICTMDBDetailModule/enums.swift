@@ -12,8 +12,8 @@ enum SectionType: Int, CaseIterable {
 }
 
 enum CellItemType {
-    case cast
-    case season
+    case cast(CastPresentation)
+    case season(SeasonPresentation)
     case none
 }
 

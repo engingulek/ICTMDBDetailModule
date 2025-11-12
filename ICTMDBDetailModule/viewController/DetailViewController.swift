@@ -19,10 +19,10 @@ final class DetailViewController: UIViewController {
         return GenericCollectionDataSource(source: presenter) { identifier, cell, item in
             guard let item = item as? CellItemType else { return }
             switch item {
-            case .cast:
-                (cell as? CastCell)
-            case .season:
-                (cell as? SeasonCell)
+            case .cast(let castItem):
+                (cell as? CastCell)?.configure(cast: castItem)
+            case .season(let seasonItem):
+                (cell as? SeasonCell)?.configure(season: seasonItem)
             case .none:
                 break
             }
@@ -100,9 +100,9 @@ final class DetailViewController: UIViewController {
     }
 }
 
-extension TvShowDetailViewController: @preconcurrency PresenterToViewTvShowDetailProtocol {
-    func sendData() {
-        configureExampleData()
+extension DetailViewController: @preconcurrency PresenterToViewTvShowDetailProtocol {
+    func sendData(detail: TvShowDetailPresentation, title: TvShowDetailTitlePresentation) {
+        configureExampleData(detail, title)
     }
     
     func prepareCollectionView() {
@@ -114,10 +114,53 @@ extension TvShowDetailViewController: @preconcurrency PresenterToViewTvShowDetai
     }
 }
 
-private extension TvShowDetailViewController {
-    func configureExampleData() {
-      
+private extension DetailViewController {
+    func configureExampleData(_ detail: TvShowDetailPresentation, _ title: TvShowDetailTitlePresentation) {
+        nameLabel.text = detail.title
+        mainPoster.setImageWithKigfisher(with: detail.mainPoster)
+        posterBGImageView.setImageWithKigfisher(with: detail.backdropPath)
+        languageFlag.text = detail.flag
+        createdByImageView.setImageWithKigfisher(with: detail.createdByImage)
+        createdByNameLabel.text = detail.createdByNameLabel
+        createdByTitleLabel.text = title.createdByTitleLabel
+        
+        let bold: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 18)]
+        let normal: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 18)]
+        
+        firstDateLabel.setAttributedText(
+            title: title.firstDateLabelTitle,
+            value: detail.firstDateLabel,
+            boldAttributes: bold, normalAttributes: normal)
+        lastDateLabel.setAttributedText(
+            title: title.lastDateLabelTitle,
+            value: detail.lastDateLabel,
+            boldAttributes: bold, normalAttributes: normal)
+        
+        overviewTitleLabel.text = title.overviewTitleLabel
+        overviewLabel.text = detail.overviewLabel
+        overviewLabel.numberOfLines = 0
+        
+        detail.categories.forEach { category in
+            let blur = BlurFactory.createBlurView(ofType: .light)
+            blur.clipsToBounds = true
+            blur.layer.cornerRadius = 10
+            
+            let categoryLabel = LabelFactory.createLabel(ofType: .msLabel(weight: .semibold), textColor: .white)
+            categoryLabel.text = category
+            
+            blur.contentView.addSubview(categoryLabel)
+            categoryLabel.snp.makeConstraints { $0.edges.equalToSuperview().inset(8) }
+            categoryStackView.addArrangedSubview(blur)
+        }
     }
+}
+
+
+
+
+#Preview {
+    let module = ICTMDBDetailModule()
+    module.createTvShowDetailModule(id: 79744)
 }
 
 
