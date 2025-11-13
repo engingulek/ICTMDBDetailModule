@@ -38,8 +38,4 @@ It is prepared specifically for the Detail screen.
 </ul>
 
 
-
-
-
-
- <video width="320" height="240" src = "https://github.com/user-attachments/assets/384b8994-13ed-4757-ae3a-c54f139021d8">
+ <video width="320" height="240" src = "https://github.com/user-attachments/assets/f993be0b-0be7-45ff-8608-51cab7e6fd54">
