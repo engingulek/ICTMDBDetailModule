@@ -46,7 +46,7 @@ enum TvShowInteractorResult {
     case sendError(_ error:TvShowErrorType)
 }
 
-protocol InteractorToPresenterTvShowDetailProtocol {
+protocol InteractorToPresenterTvShowDetailProtocol : AnyObject {
     func onHandle(handle:TvShowInteractorResult)
    
 }

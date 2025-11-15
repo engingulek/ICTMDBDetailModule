@@ -10,7 +10,7 @@ import ICTMDBNetworkManagerKit
 final class TvShowDetailInteractor : @preconcurrency PresenterToInteractorTvShowDetailProtocol {
     
     
-    var presenter: (any InteractorToPresenterTvShowDetailProtocol)?
+   weak var presenter: (any InteractorToPresenterTvShowDetailProtocol)?
    
     private let network : NetworkManagerProtocol
     
