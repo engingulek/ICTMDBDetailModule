@@ -7,7 +7,9 @@
 import Foundation
 import ICTMDBNetworkManagerKit
 
-final class TvShowDetailInteractor : @preconcurrency PresenterToInteractorTvShowDetailProtocol {
+final class TvShowDetailInteractor : PresenterToInteractorTvShowDetailProtocol {
+   
+    
     
     
    weak var presenter: (any InteractorToPresenterTvShowDetailProtocol)?
@@ -19,36 +21,29 @@ final class TvShowDetailInteractor : @preconcurrency PresenterToInteractorTvShow
         self.network = network
     }
     let deviceLanguageCode = Locale.current.language.languageCode ?? .english
-    @MainActor func loadTvShowDetail(id: Int?) {
-        guard let id = id else {return}
-        let request = TvShowDetailRequest(
-            language: deviceLanguageCode == .turkish ? .tr : .en,
-            id: id)
-        
-        network.execute(request) {[weak self] result in
-            guard let self else {return}
-            switch result {
-            case .success(let data):
-                presenter?.onHandle(handle: .sendData(data))
-                
-            case .failure:
-                presenter?.onHandle(handle: .sendError(.detailError))
-                
-            }
+    
+    
+    func loadTvShowDetail(id: Int?) async {
+        do{
+            guard let id = id else {return}
+            let request = TvShowDetailRequest(
+                language: deviceLanguageCode == .turkish ? .tr : .en,
+                id: id)
+            let result = try await network.execute(request)
+            presenter?.onHandle(handle: .sendData(result))
+        }catch{
+            presenter?.onHandle(handle: .sendError(.detailError))
         }
     }
     
-    @MainActor func loadTvShowCasts(id: Int?) {
-        guard let id = id else {return}
-        let request = CastRequest(id: id)
-        network.execute(request) { [weak self] result in
-            guard let self else {return}
-            switch result {
-            case .success(let casts):
-                presenter?.onHandle(handle: .sendCast(casts.cast))
-            case .failure:
-                presenter?.onHandle(handle: .sendError(.castError))
-            }
+    func loadTvShowCasts(id: Int?) async {
+        do{
+            guard let id = id else {return}
+            let request = CastRequest(id: id)
+            let result = try await network.execute(request)
+            presenter?.onHandle(handle: .sendCast(result.cast))
+        }catch{
+            presenter?.onHandle(handle: .sendError(.castError))
         }
     }
 }

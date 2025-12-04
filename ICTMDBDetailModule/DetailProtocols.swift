@@ -10,7 +10,7 @@ typealias Ables = UIViewAble & NavConUIAble
  import GenericCollectionViewKit
 
 
-
+@MainActor
 protocol ViewToPresenterTvShowDetailProtocol:
     AnyObject, GenericCollectionDataSourceProtocol,
     GenericCollectionDelegateSourceProtocol,
@@ -28,11 +28,11 @@ protocol PresenterToViewTvShowDetailProtocol : AnyObject,Ables{
     func prepareCollectionView()
 }
 
-
+@MainActor
 protocol PresenterToInteractorTvShowDetailProtocol {
     var presenter: InteractorToPresenterTvShowDetailProtocol? {get set}
-    func loadTvShowDetail(id:Int?)
-    func loadTvShowCasts(id:Int?)
+    func loadTvShowDetail(id:Int?) async
+    func loadTvShowCasts(id:Int?) async
 }
 
 

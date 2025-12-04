@@ -10,7 +10,7 @@ import UIKit
 import ICTMDBModularProtocols
 import ICTMDBNetworkManagerKit
 
-public class ICTMDBDetailModule : @preconcurrency TvShowDetailProtocol {
+public class ICTMDBDetailModule : @MainActor TvShowDetailProtocol {
    
     
     public init() { }
