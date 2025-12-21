@@ -28,27 +28,23 @@ protocol PresenterToViewTvShowDetailProtocol : AnyObject,Ables{
     func prepareCollectionView()
 }
 
-@MainActor
-protocol PresenterToInteractorTvShowDetailProtocol {
+
+protocol PresenterToInteractorTvShowDetailProtocol:Sendable,AnyObject  {
     var presenter: InteractorToPresenterTvShowDetailProtocol? {get set}
-    func loadTvShowDetail(id:Int?) async
-    func loadTvShowCasts(id:Int?) async
+    func loadData(id:Int?) async
 }
 
 
-enum TvShowErrorType : Error{
-    case detailError
-    case castError
-}
+
 enum TvShowInteractorResult {
     case sendData(_ data: TvShowDetail,)
     case sendCast(_ data:[Cast])
-    case sendError(_ error:TvShowErrorType)
+    case sendError
 }
 
+@MainActor
 protocol InteractorToPresenterTvShowDetailProtocol : AnyObject {
     func onHandle(handle:TvShowInteractorResult)
-   
 }
 
 
