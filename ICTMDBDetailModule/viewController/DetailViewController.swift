@@ -160,7 +160,7 @@ private extension DetailViewController {
 
 #Preview {
     let module = ICTMDBDetailModule()
-    UINavigationController(rootViewController: module.createTvShowDetailModule(id: 79744))
+    module.createTvShowDetailModule(id: 79744)
 }
 
 

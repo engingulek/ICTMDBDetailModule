@@ -58,7 +58,6 @@ extension DetailViewController {
        posterTopLayoutConstraint.isActive = true
        
        mainPoster.snp.makeConstraints {
-           $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
            $0.centerX.equalToSuperview()
            $0.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.4)
            $0.width.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.3)
