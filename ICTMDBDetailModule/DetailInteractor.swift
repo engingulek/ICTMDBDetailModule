@@ -7,9 +7,9 @@
 import Foundation
 import ICTMDBNetworkManagerKit
 
-final class TvShowDetailInteractor : @preconcurrency PresenterToInteractorTvShowDetailProtocol {
-    
-    
+final class TvShowDetailInteractor : PresenterToInteractorTvShowDetailProtocol,@unchecked Sendable {
+  
+   
    weak var presenter: (any InteractorToPresenterTvShowDetailProtocol)?
    
     private let network : NetworkManagerProtocol
@@ -19,37 +19,27 @@ final class TvShowDetailInteractor : @preconcurrency PresenterToInteractorTvShow
         self.network = network
     }
     let deviceLanguageCode = Locale.current.language.languageCode ?? .english
-    @MainActor func loadTvShowDetail(id: Int?) {
-        guard let id = id else {return}
-        let request = TvShowDetailRequest(
+    
+    
+    func loadData(id: Int?) async {
+        guard let id else {return}
+        let detailRequest = TvShowDetailRequest(
             language: deviceLanguageCode == .turkish ? .tr : .en,
             id: id)
+        let castRequest = CastRequest(id: id)
         
-        network.execute(request) {[weak self] result in
-            guard let self else {return}
-            switch result {
-            case .success(let data):
-                presenter?.onHandle(handle: .sendData(data))
-                
-            case .failure:
-                presenter?.onHandle(handle: .sendError(.detailError))
-                
-            }
+        async let detail = network.execute(detailRequest)
+        async let cast = network.execute(castRequest)
+        
+        do{
+            let (detailResult,castResult) = try await (detail,cast)
+           await presenter?.onHandle(handle: .sendData(detailResult))
+           await presenter?.onHandle(handle: .sendCast(castResult.cast))
+        }catch{
+           await presenter?.onHandle(handle: .sendError)
         }
+        
     }
     
-    @MainActor func loadTvShowCasts(id: Int?) {
-        guard let id = id else {return}
-        let request = CastRequest(id: id)
-        network.execute(request) { [weak self] result in
-            guard let self else {return}
-            switch result {
-            case .success(let casts):
-                presenter?.onHandle(handle: .sendCast(casts.cast))
-            case .failure:
-                presenter?.onHandle(handle: .sendError(.castError))
-            }
-        }
-    }
 }
 

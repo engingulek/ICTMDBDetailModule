@@ -100,7 +100,7 @@ final class DetailViewController: UIViewController {
     }
 }
 
-extension DetailViewController: @preconcurrency PresenterToViewTvShowDetailProtocol {
+extension DetailViewController:  @MainActor PresenterToViewTvShowDetailProtocol {
     func sendData(detail: TvShowDetailPresentation, title: TvShowDetailTitlePresentation) {
         configureExampleData(detail, title)
     }

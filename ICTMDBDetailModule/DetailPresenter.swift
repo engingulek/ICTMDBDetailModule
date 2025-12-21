@@ -24,12 +24,13 @@ final class TvShowDetailPresenter {
     
     func viewDidLoad() {
         view?.setBackColorAble(color: "backColor")
-        view?.setNavigationTitle(title: "Detail")
-       // view?.prepareCollectionView()
+        view?.setNavigationTitle(title: LocalizableUI.detailNavTitle.localized)
     }
 }
 
 extension TvShowDetailPresenter: ViewToPresenterTvShowDetailProtocol {
+   
+    
     func layout(for sectionIndex: Int) -> LayoutSource {
         guard let sectionType = SectionType(rawValue: sectionIndex) else {
             return LayoutSourceTeamplate.none.template
@@ -57,8 +58,9 @@ extension TvShowDetailPresenter: ViewToPresenterTvShowDetailProtocol {
     
     func getID(id: Int?) {
         guard let id = id  else {return}
-        interactor.loadTvShowDetail(id: id)
-        interactor.loadTvShowCasts(id: id)
+        Task{@MainActor in 
+            await interactor.loadData(id: id)
+        }
       
     }
     
@@ -88,21 +90,31 @@ extension TvShowDetailPresenter: ViewToPresenterTvShowDetailProtocol {
         }
     }
     
-   
-    
-    func titleForSection(at section: Int) -> (
-        title: String, sizeType:SectionSizeType,
-        buttonType: [TitleForSectionButtonType]?) {
-            guard let sectionType = SectionType(rawValue: section) else { return  (title:"",sizeType:.small,buttonType:[]) }
-            var item : (title: String, sizeType: SectionSizeType,buttonType: [TitleForSectionButtonType]?)
-            switch sectionType {
-            case .cast:
-                item = (title:LocalizableUI.cast.localized,sizeType:.large,buttonType:[])
-            case .season:
-                item = (title:LocalizableUI.season.localized,sizeType:.large,buttonType:[])
-            }
-            return item
+    func titleForSection(at section: Int) -> GenericCollectionViewKit.HeaderViewItem {
+        let headerViewItem : HeaderViewItem
+        guard let sectionType = SectionType(rawValue: section)
+        else {
+            return .init(title: "", sizeType: .empty)
         }
+        switch sectionType {
+        case .cast:
+            headerViewItem = .init(
+                title: LocalizableUI.cast.localized,
+                icon: .init(
+                image: .systemImage("person.3"),
+                tintColor: .secondary),
+                sizeType: .large)
+        case .season:
+            headerViewItem = .init(
+                title: LocalizableUI.season.localized,
+                icon: .init(
+                image: .systemImage("film.stack"),
+                tintColor: .custom(hex:"#FFA500")),
+                sizeType: .large)
+        }
+        return headerViewItem
+    
+    }
     
     func sectionType(at section: Int) -> SectionType {
         return SectionType(rawValue: section) ?? .cast
@@ -128,13 +140,9 @@ extension TvShowDetailPresenter: InteractorToPresenterTvShowDetailProtocol {
             guard let seasons = seasons else {return}
             seasonList =  seasons.map { SeasonPresentation(season: $0) }
           
-        case .sendError(let error):
-            switch error {
-            case .detailError:
-                break
-            case .castError:
-                castList = []
-            }
+        case .sendError:
+           castList = []
+            break
         case .sendCast(let casts):
             castList = casts.map{CastPresentation(cast: $0) }
             

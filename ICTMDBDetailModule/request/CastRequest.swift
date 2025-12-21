@@ -14,5 +14,5 @@ struct CastRequest : NetworkRequest {
     var path: NetworkPath {.casts(id)}
     var method: AlamofireMethod  { .GET}
     var headers: [String : String]?
-    var parameters: [String : Any]?
+    var parameters: [String : Any]? { [:]}
 }
