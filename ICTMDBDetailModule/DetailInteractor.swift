@@ -7,11 +7,9 @@
 import Foundation
 import ICTMDBNetworkManagerKit
 
-final class TvShowDetailInteractor : PresenterToInteractorTvShowDetailProtocol {
+final class TvShowDetailInteractor : PresenterToInteractorTvShowDetailProtocol,@unchecked Sendable {
+  
    
-    
-    
-    
    weak var presenter: (any InteractorToPresenterTvShowDetailProtocol)?
    
     private let network : NetworkManagerProtocol
@@ -23,28 +21,25 @@ final class TvShowDetailInteractor : PresenterToInteractorTvShowDetailProtocol {
     let deviceLanguageCode = Locale.current.language.languageCode ?? .english
     
     
-    func loadTvShowDetail(id: Int?) async {
+    func loadData(id: Int?) async {
+        guard let id else {return}
+        let detailRequest = TvShowDetailRequest(
+            language: deviceLanguageCode == .turkish ? .tr : .en,
+            id: id)
+        let castRequest = CastRequest(id: id)
+        
+        async let detail = network.execute(detailRequest)
+        async let cast = network.execute(castRequest)
+        
         do{
-            guard let id = id else {return}
-            let request = TvShowDetailRequest(
-                language: deviceLanguageCode == .turkish ? .tr : .en,
-                id: id)
-            let result = try await network.execute(request)
-            presenter?.onHandle(handle: .sendData(result))
+            let (detailResult,castResult) = try await (detail,cast)
+           await presenter?.onHandle(handle: .sendData(detailResult))
+           await presenter?.onHandle(handle: .sendCast(castResult.cast))
         }catch{
-            presenter?.onHandle(handle: .sendError(.detailError))
+           await presenter?.onHandle(handle: .sendError)
         }
+        
     }
     
-    func loadTvShowCasts(id: Int?) async {
-        do{
-            guard let id = id else {return}
-            let request = CastRequest(id: id)
-            let result = try await network.execute(request)
-            presenter?.onHandle(handle: .sendCast(result.cast))
-        }catch{
-            presenter?.onHandle(handle: .sendError(.castError))
-        }
-    }
 }
 
