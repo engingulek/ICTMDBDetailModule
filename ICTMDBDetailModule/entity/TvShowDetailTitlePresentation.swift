@@ -7,8 +7,8 @@
 import ICTMDBViewKit
 
 struct TvShowDetailTitlePresentation {
-    var createdByTitleLabel:String = LocalizableUI.createdBy.localized
-    var firstDateLabelTitle:String = LocalizableUI.firstAirDate.localized
-    var lastDateLabelTitle:String = LocalizableUI.lastDateAir.localized
-    var overviewTitleLabel:String = LocalizableUI.overview.localized
+    let createdByTitleLabel:String = LocalizableUI.createdBy.localized
+    let firstDateLabelTitle:String = LocalizableUI.firstAirDate.localized
+    let lastDateLabelTitle:String = LocalizableUI.lastDateAir.localized
+    let overviewTitleLabel:String = LocalizableUI.overview.localized
 }

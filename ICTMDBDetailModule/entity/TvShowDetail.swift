@@ -66,7 +66,7 @@ struct TEpisodeToAir: Codable {
 struct Season: Codable {
     let airDate: String?
     let episodeCount: Int?
-    let id: Int?
+    let id: Int
     let name: String?
     let overview: String?
     let posterPath: String?

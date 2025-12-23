@@ -6,13 +6,15 @@
 //
 import ICTMDBViewKit
 struct SeasonPresentation : Equatable {
+    let id : Int
     let poster : String
     let seasonTitle : String
     let airdate : String
     let episodeCount : String
     let rating:String
     
-    init(poster: String, seasonTitle: String, airdate: String, episodeCount: String, rating: String) {
+    init(id:Int,poster: String, seasonTitle: String, airdate: String, episodeCount: String, rating: String) {
+        self.id = id
         self.poster = poster
         self.seasonTitle = seasonTitle
         self.airdate = airdate
@@ -23,6 +25,7 @@ struct SeasonPresentation : Equatable {
 
 extension SeasonPresentation {
     public init ( season:Season) {
+        self.id = season.id
         self.poster = "https://image.tmdb.org/t/p/w500\(season.posterPath ?? "")"
         self.seasonTitle = season.name ?? ""
         self.airdate = "\(LocalizableUI.firstAirDate.localized) : \( season.airDate?.toLongDateString() ?? "N/A")"
