@@ -7,29 +7,34 @@
 
 import SwiftUI
 import Kingfisher
+import ICTMDBViewKit
 struct PosterView: View {
     let detail:TvShowDetailPresentation
     var body: some View {
         ZStack {
-            KFImage(URL(string:detail.backdropPath))
-                .resizable()
-            
-                .aspectRatio(contentMode: .fill)
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .edgesIgnoringSafeArea(.all)
-                .blur(radius: 25)
-                .overlay(Color.black.opacity(0.4))
-            
+            AppImage(
+                source: .remote(
+                    url:detail.backdropPath ,
+                    type: .backgroundBlur))
+           
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .edgesIgnoringSafeArea(.all)
+           
             VStack{
-                KFImage(URL(string: detail.mainPoster))
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: UIScreen.main.bounds.width / 2) // SnapKit multiply(0.25) mantığı
-                    .cornerRadius(8)
-                Text(detail.title)
-                    .foregroundStyle(.white)
-                    .font(.title)
-                    .fontWeight(.semibold)
+                
+                AppImage(
+                    source: .remote(
+                        url:detail.mainPoster ,
+                        type: .main))
+                .containerRelativeFrame(.horizontal) { size, axis in
+                    size / 2
+                }
+                
+                AppText(
+                    text: detail.title,
+                    style: .sectionHeader,
+                    color: .white)
+               
               
                     HStack(alignment:.center) {
                         Spacer()

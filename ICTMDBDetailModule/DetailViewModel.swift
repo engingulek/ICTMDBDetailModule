@@ -6,9 +6,10 @@
 //
 
 import Foundation
-
+import ICTMDBViewKit
 protocol DetailViewModelProtocol : ObservableObject {
     var isLoading:Bool {get}
+    var isError:(state:Bool,message:String) {get}
     var tvShowDetail:TvShowDetailPresentation? {get}
     var titles:TvShowDetailTitlePresentation{get}
     var casts:[CastPresentation]{get}
@@ -20,13 +21,13 @@ protocol DetailViewModelProtocol : ObservableObject {
 final class DetailViewModel : DetailViewModelProtocol {
     @Published var isLoading: Bool = false
    @Published var tvShowDetail: TvShowDetailPresentation? = nil
-    private var service:DetailServiceProtocol
+  
     @Published var titles = TvShowDetailTitlePresentation()
     @Published var casts: [CastPresentation] = []
     @Published var seasonList : [SeasonPresentation] = []
+    @Published var isError: (state: Bool, message: String) = (false, "")
     
-    
-    
+    private var service:DetailServiceProtocol
     
     init( service: DetailServiceProtocol) {
         self.service = service
@@ -35,7 +36,8 @@ final class DetailViewModel : DetailViewModelProtocol {
     func loaData(id: Int?) {
         guard let id else {return}
         isLoading = true
-        service.getDetail(id: id) { result in
+        service.getDetail(id: id) {[weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let data):
                 self.tvShowDetail = TvShowDetailPresentation(tvShowDetail: data)
@@ -43,13 +45,15 @@ final class DetailViewModel : DetailViewModelProtocol {
                         guard let seasons = seasons else {return}
                 self.seasonList =  seasons.map { SeasonPresentation(season: $0) }
                 self.isLoading = false
-            case .failure(let failure):
+                self.isError = (state:false,message:"")
+            case .failure:
                 self.isLoading = false
-                print(failure.localizedDescription)
+                self.isError = (state:true,message:LocalizableUI.somethingWentWrong.localized)
             }
         }
         
-        service.getCasts(id: id) { result in
+        service.getCasts(id: id) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let list):
                 self.casts = list.map { CastPresentation(cast: $0)}
