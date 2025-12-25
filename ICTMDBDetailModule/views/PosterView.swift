@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ICTMDBViewKit
+
 struct PosterView: View {
     let detail:TvShowDetailPresentation
     var body: some View {
