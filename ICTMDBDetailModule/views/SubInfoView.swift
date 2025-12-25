@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Kingfisher
 import ICTMDBViewKit
 struct SubInfoView: View {
     let detail:TvShowDetailPresentation

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Kingfisher
 import ICTMDBViewKit
 struct PosterView: View {
     let detail:TvShowDetailPresentation
@@ -28,7 +27,11 @@ struct PosterView: View {
                         type: .main))
                 .containerRelativeFrame(.horizontal) { size, axis in
                     size / 2
-                }
+                }.overlay(
+                    RatingView(score: detail.rating, type: .detail)
+                        .padding([.top, .trailing], 8),
+                    alignment: .topTrailing
+                )
                 
                 AppText(
                     text: detail.title,

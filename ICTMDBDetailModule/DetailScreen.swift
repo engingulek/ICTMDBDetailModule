@@ -39,7 +39,8 @@ struct DetailScreen<VM: DetailViewModelProtocol>: View {
 }
 
 #Preview {
-    ICTMDBDetailModule.createModule(id: 79744)
+    let module = ICTMDBDetailModule()
+    module.createTvShowDetailModule(id:79744)
 }
 
 

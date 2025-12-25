@@ -26,7 +26,6 @@ final class DetailViewModel : DetailViewModelProtocol {
     @Published var casts: [CastPresentation] = []
     @Published var seasonList : [SeasonPresentation] = []
     @Published var isError: (state: Bool, message: String) = (false, "")
-    
     private var service:DetailServiceProtocol
     
     init( service: DetailServiceProtocol) {

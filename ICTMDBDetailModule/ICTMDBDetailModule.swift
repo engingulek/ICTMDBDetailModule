@@ -9,16 +9,15 @@ import Foundation
 import SwiftUI
 
 import ICTMDBNetworkManagerKit
-
-public class ICTMDBDetailModule  {
-   
-    
+import ICTMDBModularProtocols
+public class ICTMDBDetailModule  : @MainActor TvShowDetailProtocol {
     public init() { }
-    @MainActor static func createModule(id:Int?) -> AnyView {
+    @MainActor   public func createTvShowDetailModule(id: Int?) -> AnyView {
         let viewModel = DetailViewModel(service: DetailService(network: NetworkManager()))
         viewModel.loaData(id: id)
         let view = DetailScreen(viewModel: viewModel)
         return AnyView(view)
     }
+
 }
 
