@@ -50,7 +50,7 @@ struct PosterView: View {
                
             }.padding(.top,60)
                 .padding(.bottom,20)
-        }.frame(height: .infinity)
+        }.frame(maxHeight: .infinity)
     }
 }
 
