@@ -39,15 +39,15 @@ final class DetailViewModel : DetailViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                self.tvShowDetail = TvShowDetailPresentation(tvShowDetail: data)
+                tvShowDetail = TvShowDetailPresentation(tvShowDetail: data)
                 let seasons  = data.seasons
                         guard let seasons = seasons else {return}
-                self.seasonList =  seasons.map { SeasonPresentation(season: $0) }
-                self.isLoading = false
-                self.isError = (state:false,message:"")
+                seasonList =  seasons.map { SeasonPresentation(season: $0) }
+                isLoading = false
+                isError = (state:false,message:"")
             case .failure:
-                self.isLoading = false
-                self.isError = (state:true,message:LocalizableUI.somethingWentWrong.localized)
+                isLoading = false
+                isError = (state:true,message:LocalizableUI.somethingWentWrong.localized)
             }
         }
         
@@ -55,7 +55,7 @@ final class DetailViewModel : DetailViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let list):
-                self.casts = list.map { CastPresentation(cast: $0)}
+                casts = list.map { CastPresentation(cast: $0)}
             case .failure(let failure):
                 print(failure.localizedDescription)
             }

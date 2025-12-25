@@ -42,7 +42,7 @@ struct PosterView: View {
               
                     HStack(alignment:.center) {
                         Spacer()
-                        ForEach(detail.categories,id:\.self) { category in
+                        ForEach(detail.categories,id:\.startIndex) { category in
                             TagView(title: category)
                         }
                         Spacer()
