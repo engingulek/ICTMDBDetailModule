@@ -32,6 +32,11 @@ final class DetailViewModel : DetailViewModelProtocol {
         self.service = service
     }
     
+    deinit {
+        print("DEBUG: DetailViewModel removed ✅")
+    }
+    
+    
     func loaData(id: Int?) {
         guard let id else {return}
         isLoading = true
