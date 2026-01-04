@@ -33,10 +33,16 @@ final class TvShowDetailInteractor : PresenterToInteractorTvShowDetailProtocol,@
         
         do{
             let (detailResult,castResult) = try await (detail,cast)
-           await presenter?.onHandle(handle: .sendData(detailResult))
-           await presenter?.onHandle(handle: .sendCast(castResult.cast))
+            await MainActor.run {
+                presenter?.onHandle(handle: .sendData(detailResult))
+                presenter?.onHandle(handle: .sendCast(castResult.cast))
+            }
+          
         }catch{
-           await presenter?.onHandle(handle: .sendError)
+            await MainActor.run {
+                presenter?.onHandle(handle: .sendError)
+            }
+            
         }
         
     }

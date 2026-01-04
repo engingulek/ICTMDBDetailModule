@@ -58,7 +58,7 @@ extension TvShowDetailPresenter: ViewToPresenterTvShowDetailProtocol {
     
     func getID(id: Int?) {
         guard let id = id  else {return}
-        Task{@MainActor in 
+        Task { 
             await interactor.loadData(id: id)
         }
       
